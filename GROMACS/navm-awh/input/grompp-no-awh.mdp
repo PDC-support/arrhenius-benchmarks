@@ -1,0 +1,76 @@
+define                  = -DPOSRES_CA
+integrator              = md
+dt                      = 0.002
+nsteps                  = 100000000
+nstxout                 = 0
+nstvout                 = 0
+nstfout                 = 0
+nstenergy               = 0
+nstlog                  = 0
+;
+rlist                   = 1.2
+coulombtype             = pme
+rcoulomb                = 1.2 ; 1.203
+vdwtype                 = Cut-off
+vdw-modifier            = Force-switch
+rvdw_switch             = 1.0
+rvdw                    = 1.2
+fourier_spacing         = 0.15
+;fourier-nx = 80
+;fourier-ny = 80
+;fourier-nz = 96
+
+;
+tcoupl                  = v-rescale
+tc_grps                 = Protein POPC SOD_POR_CLA_Water
+tau_t                   = 1.0 1.0 1.0
+ref_t                   = 300 300 300
+;nsttcouple              = 100
+;
+pcoupl                  = c-rescale ;Parrinello-Rahman
+pcoupltype              = semiisotropic
+tau_p                   = 5.0
+compressibility         = 4.5e-5  0.0
+ref_p                   = 1.0     1.0
+;
+constraints             = h-bonds
+constraint_algorithm    = LINCS
+continuation            = yes
+;
+nstcomm                 = 100
+comm_mode               = linear
+comm_grps               = Protein POPC SOD_POR_CLA_Water
+;
+refcoord_scaling        = com
+
+;AWH calculations
+pull                    = no; yes
+pull_ncoords            = 1         ; only one reaction coordinate
+pull_ngroups            = 2         ; two groups defining one reaction coordinate
+pull_group1_name        = PORE_ION
+pull_group2_name        = r_180
+pull_coord1_geometry    = direction  ; simple distance increase
+
+pull_coord1_dim         = N N Y     ; pull along z
+pull_coord1_groups      = 1 2       ; groups 1 and 2 define the reaction coordinate
+pull_coord1_start       = yes       ; define initial COM distance > 0
+pull_coord1_rate        = 0         ; 0.0005 nm per ps = 0.5 nm per ns
+pull_coord1_k           = 0         ; kJ mol^-1 nm^-2
+pull_coord1_vec         = 0 0 1
+
+pull-coord1-type            = external-potential
+pull-coord1-potential-provider = awh
+
+awh                      = no; yes
+awh-potential            = convolved
+awh-share-multisim       = yes
+awh1-share-group         = 1
+awh-nbias                = 1
+awh-nstout               = 50000
+awh1-ndim                = 1
+awh1-dim1-start          = -6.952939
+awh1-dim1-end            = 6.952939
+awh1-dim1-diffusion      = 5e-5
+awh1-dim1-force-constant  = 12800
+awh1-equilibrate-histogram = yes
+awh1-error-init          = 20

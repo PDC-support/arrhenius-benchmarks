@@ -1,0 +1,28 @@
+;
+;	File 'topol_Other_chain_I.itp' was generated
+;	By user: unknown (1000)
+;	On host: ws05
+;	At date: Thu Mar  9 16:25:07 2017
+
+;
+;	This is a include topology file
+;
+;	Created by:
+;	                    :-) GROMACS - gmx pdb2gmx, 2016.2 (-:
+;	
+;	Executable:   /home/mkasimova/Software/gromacs.2016/gromacs.install/bin/gmx
+;	Data prefix:  /home/mkasimova/Software/gromacs.2016/gromacs.install
+;	Working dir:  /media/mkasimova/Data2/NavMS/system.preparation/add.lipids/gromacs.2016
+;	Command line:
+;	  gmx pdb2gmx -f not.protein.final.pdb
+;	Force field was read from current directory or a relative path - path added.
+;
+
+[ moleculetype ]
+; Name            nrexcl
+CLA       3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue 134 CLA rtp CLA  q -1.0
+     1        CLA    134    CLA    CLA    133         -1      35.45   ; qtot 131
