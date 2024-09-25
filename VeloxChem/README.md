@@ -23,11 +23,13 @@ Three versions (CPU, GPU-CUDA and GPU-HIP) of the VeloxChem code are provided fo
   - GPU-HIP version:
     - https://github.com/VeloxChem/VeloxChem/releases/tag/hip-bench
 
-### About modifications to the source Code
+### Guidelines for modifying the source code
 
-Limited modifications (within 1000 lines) to the VeloxChem source code are acceptable provided that
-the modifications are made available to the VeloxChem development team 
-together with the benchmark report.
+A limited amount of modifications to the VeloxChem source code are acceptable as long as these
+modifications, for example new compute kernels or optimizations to
+existing kernels, must be made available for integration in the
+VeloxChem source code. The contributions must be made available before the
+acceptance benchmark runs on the delivered system.
 
 ## Installation guide
 
