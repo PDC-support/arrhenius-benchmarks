@@ -1,0 +1,50 @@
+{
+  "version": 1.0,
+  "case":
+  {
+  "mesh_file": "tgv_16M.nmsh",
+  "output_boundary": false,
+  "output_checkpoints": false,
+  "output_at_end": false,
+  "load_balance": false,
+  "job_timelimit": "00:00:00",
+  "end_time": 0.03,
+  "timestep": 1e-4,
+  "numerics": {
+    "time_order": 3,
+    "polynomial_order": 7,
+    "dealias": true
+  },
+  "fluid": {
+    "scheme": "pnpn",
+    "Re": 1600,
+    "initial_condition": {
+      "type": "user"
+    },
+    "velocity_solver": {
+      "type": "fusedcg",
+      "preconditioner": "jacobi",
+      "projection_space_size": 0,
+      "absolute_tolerance": 1e-7,
+      "max_iterations": 800
+    },
+    "pressure_solver": {
+      "type": "gmres",
+      "preconditioner": "hsmg+pipecg",
+      "projection_space_size": 8,
+      "absolute_tolerance": 1e-7,
+      "max_iterations": 800
+    },
+    "output_control": "never",
+    "output_value": 0
+  },
+  "simulation_components": 
+  [
+    {
+      "type": "vorticity",
+      "compute_control": "tsteps",
+      "compute_value": 50
+    }
+  ]
+  }
+}
