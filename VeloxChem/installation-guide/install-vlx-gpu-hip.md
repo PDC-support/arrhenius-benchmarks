@@ -34,7 +34,7 @@ cd icl-magma-06368d9b8177/
 cp make.inc-examples/make.inc.hip-gcc-openblas make.inc
 # Edit make.inc
 # Update OPENBLASDIR, ROCM_PATH, FORT and GPU_TARGET
-# FORT should point to flang under rocm's llvm/bin
+# FORT should point to flang under rocm's llvm/bin, or gfotran if you use GNU compiler
 make -f make.gen.hipMAGMA -j 128
 make lib/libmagma.so -j 128
 cp -RP include $MAGMAHOME/
