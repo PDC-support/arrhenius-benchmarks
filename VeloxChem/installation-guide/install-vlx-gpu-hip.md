@@ -12,9 +12,9 @@ Note: If you use GNU compiler for host C++ code, please make sure that it is onl
 ## Set VLXHOME
 
 ```bash
-git clone -b benchmark-gpu-hip https://github.com/VeloxChem/VeloxChem.git veloxchem.gpu-hip
-
-cd VeloxChem.gpu-hip
+curl -L https://github.com/VeloxChem/VeloxChem/archive/refs/tags/hip-bench.tar.gz -o VeloxChem-hip-bench.tar.gz
+tar xf VeloxChem-hip-bench.tar.gz
+cd VeloxChem-hip-bench
 export VLXHOME=$(pwd)
 ```
 

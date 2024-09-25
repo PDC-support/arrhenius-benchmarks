@@ -12,9 +12,9 @@
 ## Set VLXHOME
 
 ```bash
-git clone -b cpu-bench https://github.com/VeloxChem/VeloxChem.git VeloxChem.cpu
-
-cd VeloxChem.cpu
+curl -L https://github.com/VeloxChem/VeloxChem/archive/refs/tags/cpu-bench.tar.gz -o VeloxChem-cpu-bench.tar.gz
+tar xf VeloxChem-cpu-bench.tar.gz
+cd VeloxChem-cpu-bench
 export VLXHOME=$(pwd)
 ```
 
@@ -95,7 +95,7 @@ python3 -m pytest -v -s -x python_tests/test_scf_*
 - The following lines are needed in the job script. Note that `VLXHOME` and `LD_LIBRARY_PATH` should be updated to the actual paths.
   - `export LD_LIBRARY_PATH=/path/to/openblas/lib:$LD_LIBRARY_PATH`  (if you use OpenBLAS)
   - `export LD_LIBRARY_PATH=/path/to/libxc/lib:$LD_LIBRARY_PATH`
-  - `export VLXHOME=/path/to/VeloxChem.cpu`
+  - `export VLXHOME=/path/to/VeloxChem-cpu-bench`
   - `source $VLXHOME/vlxenv/bin/activate`
 - You can use the `vlx` entry script to run the benchmark calculation, for example
   - `srun vlx g-quad-neutral.inp g-quad-neutral.out`

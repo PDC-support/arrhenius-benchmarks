@@ -10,9 +10,9 @@
 ## Set VLXHOME
 
 ```bash
-git clone -b benchmark-gpu-cuda https://github.com/VeloxChem/VeloxChem.git veloxchem.gpu-cuda
-
-cd VeloxChem.gpu-cuda
+curl -L https://github.com/VeloxChem/VeloxChem/archive/refs/tags/cuda-bench.tar.gz -o VeloxChem-cuda-bench.tar.gz
+tar xf VeloxChem-cuda-bench.tar.gz
+cd VeloxChem-cuda-bench
 export VLXHOME=$(pwd)
 ```
 
@@ -75,7 +75,7 @@ python3 -m pytest -v -s -x tests/
 - It is recommended to set `OMP_NUM_THREADS` to the number of physical cores per node.
 - You can try different `OMP_PLACES` settings but normally setting `OMP_PLACES` to `cores` should suffice.
 - The following lines are needed in the job script. Note that `VLXHOME` should be updated to the actual path.
-  - `export VLXHOME=/path/to/VeloxChem.gpu-cuda`
+  - `export VLXHOME=/path/to/VeloxChem-cuda-bench`
   - `source $VLXHOME/vlxenv/bin/activate`
   - `export PYTHONPATH=$VLXHOME/build/python:$PYTHONPATH`
   - `export PATH=$VLXHOME/build/bin:$PATH`
