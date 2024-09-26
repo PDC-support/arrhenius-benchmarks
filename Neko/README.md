@@ -79,4 +79,6 @@ Reference strong scaling characteristics can be found in the following [open-acc
 
 The figure of merit (FOM) used to evaluate the benchmark is the performance measured in throughput (GDoF/s) of one time-step, computed based on the average time per time step for the last 200 time steps. To extract it, use the provided awk script [neko_fom.awk](./tgv/neko_fom.awk) on the log file e.g: `awk -f neko_fom.awk logfile`.
 
+**Note:**  All reported results must be obtained from a double precision floating point build of Neko.
+
 Information on which compiler was used (vendor and version number) must also be provided as additional information in the benchmark report.
