@@ -134,10 +134,10 @@ To account for the substantial variance in ML training times, final results are 
 
 The table below shows the results of the MLPerf Training Benchmarks , conducted using NVIDIA H100 and A100 GPUs.
 
-| MLPerf Version | Number of Nodes | Number of GPUs | Hardware             | Latency (Minutes) |
-|-------------------|-----------------|----------------|----------------------|-------------------|
-| 4.0               | 1               | 8              | NVIDIA-H100-SXM5-80G | 5.469             |
-| 2.0               | 1               | 8              | A100-SXM-80GB        | 18.442              |
+| MLPerf Version | Hardware             | Number of Nodes | Number of GPUs | Latency (Minutes) |
+|----------------|----------------------|-----------------|----------------|-------------------|
+| 4.0            | NVIDIA-H100-SXM5-80GB | 1               | 8              | 5.469             |
+| 2.0            | NVIDIA-A100-SXM-80GB  | 1               | 8              | 18.442            |
 
 ## Contact
 
