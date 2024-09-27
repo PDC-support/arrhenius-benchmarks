@@ -126,7 +126,7 @@ By achieving the 25-minute target on an 8-GPU node, vendors ensure that their sy
 
 ### Obtaining benchmark results
 
-Log files are generated during the training process. Ensure that key metrics like training loss, throughput and validation accuracy are captured.
+Log files are generated during the training process. Ensure that key metrics like training loss, throughput, and validation accuracy are captured. These log files should be submitted together with the benchmark report for full transparency and verification.
 
 To account for the substantial variance in ML training times, final results are obtained by measuring the benchmark a benchmark-specific number of times, discarding the lowest and highest results, and averaging the remaining results. 
 
@@ -138,6 +138,7 @@ The table below shows the results of the MLPerf Training Benchmarks , conducted 
 |----------------|----------------------|-----------------|----------------|-------------------|
 | 4.0            | NVIDIA-H100-SXM5-80GB | 1               | 8              | 5.469             |
 | 2.0            | NVIDIA-A100-SXM-80GB  | 1               | 8              | 18.442            |
+
 
 ## Contact
 
