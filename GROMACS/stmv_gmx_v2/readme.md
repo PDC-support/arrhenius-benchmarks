@@ -11,13 +11,14 @@ For a description of this case please see the [benchmark README file](./inputs/R
 
 ## Performance aspects
 
-# TODO update
-# GPUs / CPUs
-
 The simulation system used for this benchmark consists of 1.06 million atoms.
 When domain-decomposed inhomegeneous work distribution across domains poses a challenge
 for strong scaling. Additionally, at high scale wider MPI ranks and tuning of
 separate PME ranks is required in order to balance the PP-PME load.
+The limiting factor to strong scaling at peak is 3D-FFT scalability on both
+CPU-only and heterogeneous machines. In particular for the latter,
+since unlike in the CPU case GROMACS does not implement the FFT parallelization,
+a scalable 3D-FFT library is critical.
 
 
 ## How to quantify benchmark performance
@@ -38,19 +39,26 @@ any number of nodes on which the job could be run can be inferred
 through interpolation with reasonable confidence.  
 
 The measured peak performance needs to be a *suitained* performance under full
-machine load, that is N_jobs equal sized jobs should be execute simultaneously,
+machine load, that is N_jobs equal sized jobs should be executed simultaneously,
 where N_jobs = N_nodes_tot / num_nodes_used with
 * N_nodes_tot the total number of nodes in the respective module
 * num_nodes_used the total number of nodes used for the benchmark run.
 
 Only the performance of the lowest performing of the N_jobs concurrent jobs
-must be entered into the benchmark evaluation spreadsheet.
+must be entered as the FOM into the benchmark evaluation spreadsheet.
 Results for each strong scaling data point together with mdrun log outputs
-files must be provided with the  benchmark report.
+files must be provided with the benchmark report.
 
 It is not necessary to fully populate the nodes if it gives superior
 performance, but this must be clearly explained in the benchmark
 report.
 
-Vendors may make a free choice of the number of PME nodes that can
-affect performance.
+## Minimum required performance
+
+* Module 1: 221 ns/day
+* Module 2: 110 ns/day
+
+## Reference performance
+
+* Module 1: 221 ns/day using 96 nodes on a Cray EX235 with 2 x AMD EPYC 7742;
+* Module 2: 107 ns/day using 1 node on a Cray EX235a with 4 x AMD MI250X;

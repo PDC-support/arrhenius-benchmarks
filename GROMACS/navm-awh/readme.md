@@ -96,5 +96,14 @@ It is not necessary to fully populate the nodes if it gives superior
 performance, but this must be clearly explained in the benchmark
 report.
 
-Vendors may make a free choice of the number of PME nodes that can
-affect performance.
+## Minimum required performance
+
+# TODO
+* Module 1:  ns/day
+* Module 2:  ns/day
+
+## Reference performance
+
+# TODO
+* Module 1:  ns/day using 96 nodes on a Cray EX235 with 2 x AMD EPYC 7742;
+* Module 2: 160 ns/day using 32 nodes on a Cray EX235a with 4 x AMD MI250X;
