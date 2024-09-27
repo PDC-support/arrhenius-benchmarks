@@ -26,7 +26,7 @@ a scalable 3D-FFT library is critical.
 Benchmark performance FOM is ns/day and must be measured in
 a simulation (post counter reset) of at least least 15 minutes wall-time.
 
-Performance should be measured in a strong scaling study, that is 
+Performance must be measured in a strong scaling study, that is 
 the benchmark must be run on the smallest number of nodes on which the
 benchmark can be executed (expected to be one) increasing the
 number of nodes until the peak performance is reached and the
@@ -39,7 +39,7 @@ any number of nodes on which the job could be run can be inferred
 through interpolation with reasonable confidence.  
 
 The measured peak performance needs to be a *suitained* performance under full
-machine load, that is N_jobs equal sized jobs should be executed simultaneously,
+machine load, that is N_jobs equal sized jobs are executed simultaneously,
 where N_jobs = N_nodes_tot / num_nodes_used with
 * N_nodes_tot the total number of nodes in the respective module
 * num_nodes_used the total number of nodes used for the benchmark run.

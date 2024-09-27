@@ -1,4 +1,4 @@
-# GROMACS navm ensemble benchmark
+# GROMACS navm-awh ensemble benchmark
 
 For a description of this case please see the [benchmark README
 file](./inputs//README)
@@ -12,7 +12,7 @@ file](./inputs//README)
   [input directory](./inputs/) and the ``topol.tpr`` input file can
   re-generated using the ``gmx grompp`` tool;
 - Ensemble setup directory tree is provided in the
-  [ensemble_inputs.tar.gz archive](./inputs/ensemble_inputs.tar.gz)
+  [ensemble_64-SIM.tar.gz archive](./inputs/ensemble_64-SIM.tar.gz)
 
 ### Generating the inputs for the ensemble run
 
@@ -26,11 +26,10 @@ identical input files, a single tpr input can be created and symlinked
 in each of the output directories.
 
 The (bash) shell script code below shows the steps to re-create
-the 64 inputs which are provided in
-[ensemble_inputs.tar.gz archive](./inputs/ensemble_inputs.tar.gz).
+the 64 inputs which are provided with the inputs.
 ```
 gmx grompp -n index.ndx -r conf.gro -o topol.tpr
-for i in $(seq -f "%03g" 1 64); do
+for i in $(seq -f "%02g" 1 64); do
   dirname=repl_${i}
   ( mkdir $dirname && cd $dirname && ln -s ../topol.tpr topol.tpr; )
 done
@@ -47,7 +46,7 @@ record performance excluding any load balancing phase or hardware warm-up.
 
 An example command for a 64-rank run (i.e. one rank per simulation) with reported
 performance for the latter 15 minutes of the 30 minutes run:
-`mpirun -np 64 gmx_mpi mdrun -multidir repl_* -nsteps -1 -maxh 0.5 -resethway`
+`mpirun -np 64 gmx_mpi mdrun -multidir sim_* -nsteps -1 -maxh 0.5 -resethway`
 
 Note that each member simulation will have its performance
 reported in its own log file.
@@ -73,16 +72,14 @@ simulation throughput across the ensemble.
 
 ## How to quantify benchmark performance
 
-Benchmark performance FOM is ns/day and must be measured in
-a simulation (post counter reset) of at least least 15 minutes wall-time.
+Benchmark performance FOM is the average ns/day across all ensemble members,
+and must be measured in a simulation (post counter reset) of at least least 15 minutes wall-time.
 
 The benchmark can be run on any amount of resources which satisfies 
-the following minimum performance constraints:
-- On the CPU partition, the average performance per ensemble member must not be lower than 180 ns/day
-- On the GPU partition, the average performance per ensemble member must not be lower than 160 ns/day
+the minimum performance constraints described in the next section.
 
 The measured peak ensemble throughput needs to be a *suitained* performance under full
-machine load, that is N_jobs equal sized ensemble jobs should be executed simultaneously,
+machine load, that is N_jobs equal sized ensemble jobs are executed simultaneously,
 where N_jobs = N_nodes_tot / num_nodes_used with
 * N_nodes_tot the total number of nodes in the respective module
 * num_nodes_used the total number of nodes used for the benchmark run.
@@ -99,11 +96,11 @@ report.
 ## Minimum required performance
 
 # TODO
-* Module 1:  ns/day
-* Module 2:  ns/day
+* Module 1: 180 ns/day
+* Module 2: 170 ns/day
 
 ## Reference performance
 
 # TODO
-* Module 1:  ns/day using 96 nodes on a Cray EX235 with 2 x AMD EPYC 7742;
-* Module 2: 160 ns/day using 32 nodes on a Cray EX235a with 4 x AMD MI250X;
+* Module 1: 179 ns/day using 512 nodes on a Cray EX235 with 2 x AMD EPYC 7742
+* Module 2: 160 ns/day using 32 nodes on a Cray EX235a with 4 x AMD MI250X
