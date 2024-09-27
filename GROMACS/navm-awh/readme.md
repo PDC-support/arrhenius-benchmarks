@@ -78,8 +78,8 @@ a simulation (post counter reset) of at least least 15 minutes wall-time.
 
 The benchmark can be run on any amount of resources which satisfies 
 the following minimum performance constraints:
-- On the CPU partition, the average performance per ensemble member must not be lower than 180 ns/day
-- On the GPU partition, the average performance per ensemble member must not be lower than 160 ns/day
+- On the CPU partition, the average performance per ensemble member must not be lower than 180 ns/day;
+- On the GPU partition, the average performance per ensemble member must not be lower than 160 ns/day.
 
 The measured peak ensemble throughput needs to be a *suitained* performance under full
 machine load, that is N_jobs equal sized ensemble jobs should be executed simultaneously,
