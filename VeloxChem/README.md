@@ -89,6 +89,8 @@ result matches the  reference value below
 - The total walltime spent in the benchmark can be obtained by executing `cat
 g-quad-neutral.out | grep "Total execution time"`
 
+- The output file `g-quad-neutral.out` must be submitted together with the benchmark report.
+
 - Reference benchmark timing
   - CPU version on [Dardel](https://www.pdc.kth.se/hpc-services/computing-systems/about-the-dardel-hpc-system-1.1053338): 3194 seconds on 8 Dardel-CPU nodes
   - GPU-HIP version on [Dardel](https://www.pdc.kth.se/hpc-services/computing-systems/about-the-dardel-hpc-system-1.1053338): 882 seconds on 4 Dardel-GPU nodes
