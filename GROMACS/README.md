@@ -37,11 +37,11 @@ Public License (LGPL) Version 2.1; for further details see the
 A limited amount of modifications to the GROMACS source code are acceptable as long as these
 modifications, for example new compute kernels or optimizations to
 existing kernels, must be made available for integration in the
-GROMACS source code.  Specifically, the winning tender must provide
+GROMACS source code. Specifically, the winning tender must provide
 any modifications formatted to follow the [GROMACS contribution
 guidelines](http://manual.gromacs.org/documentation/current/dev-manual/contribute.html).
-The contributions must be made available before the
-before acceptance benchmark runs on the delivered system.
+The contributions must be made available before acceptance benchmark runs on the delivered system
+under the same license as that used by GROMACS.
 
 ## Installation guide
 
@@ -55,17 +55,16 @@ SIMD instruction
 set](http://manual.gromacs.org/documentation/current/install-guide/index.html#simd-support)
 is enabled at configure time.
 
-The binary installations used for benchmarks must be validated
-(on a relevant range of resource counts when applicable)
-and the validation run outputs submitted with the documentation.
+Note that if the official source distribution is altered we recommend that in such cases a custom version
+string suffix is used (passed to cmake using `-DGMX_VERSION_STRING_OF_FORK=`).
+
+### Validating a build
+
+All binary builds/installations used for benchmarks must be validated
+on the relevant range of resource counts. Specifically, the integration and regression must be also run multi-node.
+The validation run outputs must be submitted with the benchmark report.
 For the details on how to run validation follow the instruction at
-[GROMACS for
-correctness](http://manual.gromacs.org/documentation/current/install-guide/index.html#testing-gromacs-for-correctness).
-
-
-Note that if the official source distribution is altered we recommend that in such cases [a custom version
-string suffix is
-used](http://manual.gromacs.org/documentation/current/install-guide/index.html#validating-gromacs-for-source-code-modifications).
+[GROMACS for correctness](http://manual.gromacs.org/documentation/current/install-guide/index.html#testing-gromacs-for-correctness).
 
 ## Performance considerations
 
@@ -74,11 +73,11 @@ multiple levels of hardware parallelism.  For inter-node
 parallelization MPI is used both SPMD and
 [MPMD](http://manual.gromacs.org/documentation/current/user-guide/mdrun-performance.html#).
 Intra-node parallelization is done using SIMD compiler intrinsics,
-OpenMP multi-threading as well as CUDA and OpenCL for heterogeneous
-parallelization using GPU acceleration. Note that starting with the
-current release, in single-GPU throughput runs the GPU acceleration
-supports a fully-GPU resident loop for the force-compute steps in
-CUDA.
+OpenMP multi-threading as well as CUDA and SYCL for heterogeneous
+parallelization using GPU acceleration.
+Note that the recommended production GPU backends are CUDA for NVIDIA GPUs and
+SYCL for Intel (DPC++) and AMD (ACPP), for details see 
+[the GROMACS installation guide](https://manual.gromacs.org/documentation/current/install-guide/index.html#gpu-support).
 
 For details on how to obtain the best performance, the reader is
 recommended to consult the [relevant section of the GROMACS user
@@ -86,14 +85,13 @@ guide](http://manual.gromacs.org/documentation/current/user-guide/mdrun-performa
 
 ## Benchmark cases
 
-The PDC procurement benchmark suite includes two GROMACS benchmark
-cases:
+The benchmark suite includes two GROMACS benchmark cases:
 
 - [ensemble benchmark](./navm-awh)
 - [strong scaling benchmark](./stmv_gmx_v2)
 
 Further information about these benchmark cases is provided in README
-files provided in the subdirectories.
+files the respective subdirectories.
 
 
 ### Running the benchmark cases
@@ -105,37 +103,30 @@ guide](http://manual.gromacs.org/documentation/current/user-guide/mdrun-performa
 
 ### Minimum performance
 
-The ensemble benchmark will be evaluated as a sustained throughput benchmark
-and requires a minimum performance to be met:
-
-- On the Module 1 the performance of an individual run must not be less than 180 ns/day.
-- On the Module 2, the performance of an individual run must not be less than 160 ns/day.
-
-The strong scaling benchmark will be evaluated as based on the sustained peak performance
-and requires the following minimum performance to be met:
-- On the Module 1 the peak performance required to be no less than 200 ns/day.
-- On the Module 2, the performance of an individual run must not be less than 100 ns/day.
+The ensemble benchmark will be evaluated based on sustained throughput benchmark
+performance and requires a minimum performance to be met, [see](./navm-awh/readme.md).
+The strong scaling benchmark will be evaluated based on the sustained peak performance
+and requires the following minimum performance to be met, [see](./stmv_gmx_v2).
 
 ### Obtaining benchmark results
 
-The ``mdrun`` simulation tool prints a performance report at the end
-of its log output.  This includes both wall-time and "ns/day" (the
-simulation throughput expressed as simulated nanosecond per 24 hours).
-The latter is the FOM metric required to be entered in the in the benchmark
+All benchmarks must be done using mixed-precision builds of GROMACS.
+
+"ns/day", the simulation throughput expressed as simulated nanosecond per 24 hours
+is the figure of merit (FOM) required to be entered in the in the benchmark
 evaluation sheet.
-This number can be easily parsed from the second first column of the
-row starting with "Performance:" at the end of the ``mdrun`` log.
+The ``mdrun`` simulation tool prints a performance report at the end
+of the log output which includes the (post-counter reset) wall-time and "ns/day".
 
-The simulation length can be specified using either:
-- as the number of iterations with the ``-nsteps N`` option or
-- as the simulation wall-time in hours using ``-nsteps -1 -maxh T``.
-Note that benchmarks measurements must be done over at least 15 minutes runtime
-with easurements eliminting both factors external (e.g. processor temperature and clock
-throttle) as well as internal to simulation (e.g. load-balancer) reach
-a stable state.  Therefore, it is strongly recommended to exclude the initial "warm-up"
-phase by extending the runs to a sufficient total length (e.g. 2\*15 minutes if using `-resethway`)
-and resetting the internal timers using `-resethway` or `-resetstep N` options.
-
-## Contact
-# TODO
-Questions regarding the benchmark(s) must be posted via 
+Benchmark performance must be reported for at least 15 minutes runtime.
+Recording performance must be done such that the initial 
+until factors external to the simulation (e.g. component temperatures and clock frequencies)
+as well as internal to simulation (e.g. load-balancer) reach a
+sufficiently stable state that represents a production run.
+Therefore, it is strongly recommended to exclude such initial "warm-up"
+phase by extending the benchmark run to a sufficient total length
+and excluding the inital part using the `mdrun` internal timer resetting options
+`-resethway` or `-resetstep N`.
+Simulation length can be specified using either:
+- as the simulation wall-time in hours using ``-nsteps -1 -maxh T`` (run length will be `T*0.99` hours) or
+- as the total number of iterations with ``-nsteps N``.
