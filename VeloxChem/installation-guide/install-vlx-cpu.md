@@ -9,6 +9,8 @@
 - CMake
 - [Libxc](https://libxc.gitlab.io/)
 
+Note: If you use Intel compiler and Intel MPI, please make sure to use Intel MPI<=2021.10
+
 ## Set VLXHOME
 
 ```bash
@@ -54,12 +56,14 @@ source $VLXHOME/vlxenv/bin/activate
 export SKBUILD_CONFIGURE_OPTIONS="-DVLX_LA_VENDOR=<math_library> -DCMAKE_CXX_COMPILER=<mpi_cxx_compiler>"
 
 # If you use OpenBLAS
+export CMAKE_PREFIX_PATH=/path/to/openblas:$CMAKE_PREFIX_PATH
 export PKG_CONFIG_PATH=/path/to/openblas/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # Libxc is needed
+export CMAKE_PREFIX_PATH=/path/to/libxc:$CMAKE_PREFIX_PATH
 export PKG_CONFIG_PATH=/path/to/libxc/lib/pkgconfig:$PKG_CONFIG_PATH
 
-python3 -m pip install .
+python3 -m pip install -v .
 ```
 
 ## Test VeloxChem CPU version

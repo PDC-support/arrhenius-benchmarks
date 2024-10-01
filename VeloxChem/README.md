@@ -28,8 +28,10 @@ Three versions (CPU, GPU-CUDA and GPU-HIP) of the VeloxChem code are provided fo
 A limited amount of modifications to the VeloxChem source code are acceptable as long as these
 modifications, for example new compute kernels or optimizations to
 existing kernels, must be made available for integration in the
-VeloxChem source code. The contributions must be made available before the
-acceptance benchmark runs on the delivered system.
+VeloxChem source code. Specifically, the winning tender must provide
+any modifications formatted to follow the [VeloxChem programming style](https://veloxchem.org/docs/programming_style.html).
+The contributions must be made available before the
+acceptance benchmark runs on the delivered system under the same license as that used by VeloxChem.
 
 ## Installation guide
 
