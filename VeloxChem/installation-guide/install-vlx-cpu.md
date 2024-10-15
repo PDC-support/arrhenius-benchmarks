@@ -63,7 +63,9 @@ export PKG_CONFIG_PATH=/path/to/openblas/lib/pkgconfig:$PKG_CONFIG_PATH
 export CMAKE_PREFIX_PATH=/path/to/libxc:$CMAKE_PREFIX_PATH
 export PKG_CONFIG_PATH=/path/to/libxc/lib/pkgconfig:$PKG_CONFIG_PATH
 
-python3 -m pip install -v .
+# It is recommended to run "pip install" with the "--no-build-isolation" option,
+# provided that all the needed Python packages have been installed
+python3 -m pip install --no-build-isolation -v .
 ```
 
 ## Test VeloxChem CPU version
