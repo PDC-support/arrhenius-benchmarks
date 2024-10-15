@@ -20,8 +20,7 @@ existing kernels, must be made available for integration in the
 Neko source code.  Specifically, the winning tender must provide
 any modifications formatted to follow the [Neko contribution
 guidelines](https://neko.cfd/docs/release/d1/d5a/contributing.html).
-The contributions must be made available before the
-before acceptance benchmark runs on the delivered system.
+The contributions must be made available before acceptance benchmark runs on the delivered system under the same license as that used by Neko.
 
 ## Installation guide 
 To build Neko, you will need a Fortran compiler supporting the Fortran-08 standard, autotools, pkg-config, a working MPI installation supporting the Fortran 2008 bindings (`mpi_f08`), BLAS/LAPACK and JSON-Fortran. Detailed installation instructions can be found in the [Neko manual](https://neko.cfd/docs/release/d5/dfc/installation.html)
@@ -67,7 +66,7 @@ It is important to check that results from Neko are scientifically valid. Vendor
 
 ### Minimum performance
 
-The required minimum performance for both cases is 18 GDoF/s for module 1 and 118 GDoF/s for module 2.
+The required minimum performance for both cases is 31 GDoF/s for module 1 and 118 GDoF/s for module 2.
 
 #### Reference performance numbers
 - Module 1: 13.86 GDoF/s on 512 nodes of a Cray EX235a with 2 x AMD EPYC 7742
