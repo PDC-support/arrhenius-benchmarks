@@ -95,12 +95,10 @@ report.
 
 ## Minimum required performance
 
-# TODO
-* Module 1: 180 ns/day
-* Module 2: 170 ns/day
+* Module 1: 170 ns/day
+* Module 2: 180 ns/day
 
 ## Reference performance
 
-# TODO
-* Module 1: 179 ns/day using 512 nodes on a Cray EX235 with 2 x AMD EPYC 7742
+* Module 1: 167 ns/day using 512 nodes on a Cray EX235 with 2 x AMD EPYC 7742
 * Module 2: 160 ns/day using 32 nodes on a Cray EX235a with 4 x AMD MI250X
