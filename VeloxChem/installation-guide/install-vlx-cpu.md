@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - C++ compiler with C++17 standard and OpenMP support
-- Linear algebra libraries implementing the BLAS and LAPACK interfaces (e.g. Intel MKL, OpenBLAS or Cray LibSci)
+- Linear algebra libraries implementing the BLAS and LAPACK interfaces (e.g. Intel MKL or OpenBLAS)
 - MPI library
 - Python (>=3.8)
 - CMake
@@ -42,6 +42,8 @@ Please note that `mpi4py` should be compiled from source using the same compiler
 Please also note that VeloxChem CPU version uses `numpy` for matrix diagonalization, and it is important to make sure that
 the installed `numpy` has good performance.
 
+Note: If you use a Cray machine, please avoid using the numpy package that comes with the cray-python module, because we have seen issues with diagonalization of large matrix. You can, for example, install OpenBLAS and compile numpy using OpenBLAS as backend.
+
 ## Install Libxc
 
 Please follow the [Libxc installation](https://libxc.gitlab.io/installation/) page. It is recommended to install Libxc using CMake.
@@ -51,7 +53,7 @@ Please follow the [Libxc installation](https://libxc.gitlab.io/installation/) pa
 ```bash
 source $VLXHOME/vlxenv/bin/activate
 
-# Note: replace <math_library> by the actual library (MKL, OpenBLAS or Cray)
+# Note: replace <math_library> by the actual library (MKL or OpenBLAS)
 #       replace <mpi_compiler> by e.g. mpicxx
 export SKBUILD_CONFIGURE_OPTIONS="-DVLX_LA_VENDOR=<math_library> -DCMAKE_CXX_COMPILER=<mpi_cxx_compiler>"
 
