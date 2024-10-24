@@ -41,6 +41,12 @@ cp -RP include $MAGMAHOME/
 cp -RP lib $MAGMAHOME/
 ```
 
+Note: If you are using the latest version of ROCm, you may try to use hipsolver
+instead of MAGMA for matrix diagonlaization. You can find a patch for using
+hipsolver in this repository ([link to the patch](vlx-hipsolver.patch)).
+However, we have not tested the performance of the latest hipsolver in matrix
+diagonliazation, and we do not know how the peformance compares to MAGMA.
+
 ## Install Python packages
 
 VeloxChem GPU-HIP version depends on the following Python packages:
