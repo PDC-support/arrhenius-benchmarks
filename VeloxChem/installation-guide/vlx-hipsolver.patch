@@ -1,0 +1,136 @@
+diff --git a/src/Makefile.setup b/src/Makefile.setup
+index 8da70a151..23da20d25 100644
+--- a/src/Makefile.setup
++++ b/src/Makefile.setup
+@@ -36,8 +36,8 @@ DEVCC  := hipcc --offload-arch=gfx90a
+ CXX_REL_FLG := -fopenmp -std=c++17
+ CXX_DEB_FLG := -fopenmp -std=c++17
+ 
+-MATH_INC := -I$(MAGMA_HOME)/include
+-MATH_LIB := -L$(MAGMA_HOME)/lib -lmagma
++#MATH_INC := -I$(MAGMA_HOME)/include
++#MATH_LIB := -L$(MAGMA_HOME)/lib -lmagma
+ 
+ PYTHON_INC := $(shell $(PYTHON)-config --includes)
+ PYTHON_INC += -I$(shell $(PYTHON) -c "import mpi4py; print(mpi4py.get_include())")
+@@ -49,8 +49,8 @@ CXX_DEB_FLG += -fPIC $(PYTHON_INC)
+ 
+ DEVCC_REL_FLG := -fPIC -fopenmp -std=c++17
+ DEVCC_DEB_FLG := -fPIC -fopenmp -std=c++17
+-DEVICE_LIB := -lhipblas
+-#DEVICE_LIB := -lhipblas -lhipsolver
++#DEVICE_LIB := -lhipblas
++DEVICE_LIB := -lhipblas -lhipsolver
+ 
+ MACLIBS :=
+ 
+diff --git a/src/gpu/FockDriverGPU.hip b/src/gpu/FockDriverGPU.hip
+index 247ee8616..ad616ce5d 100644
+--- a/src/gpu/FockDriverGPU.hip
++++ b/src/gpu/FockDriverGPU.hip
+@@ -24,8 +24,8 @@
+ 
+ #include <hip/hip_runtime.h>
+ #include <hipblas/hipblas.h>
+-//#include <hipsolver/hipsolver.h>
+-#include <magma_v2.h>
++#include <hipsolver/hipsolver.h>
++//#include <magma_v2.h>
+ 
+ #include <omp.h>
+ 
+diff --git a/src/gpu/GpuSafeChecks.hpp b/src/gpu/GpuSafeChecks.hpp
+index 678a6725b..58b86a96a 100644
+--- a/src/gpu/GpuSafeChecks.hpp
++++ b/src/gpu/GpuSafeChecks.hpp
+@@ -47,6 +47,7 @@
+         }                                                                                         \
+     }
+ 
++/*
+ #define magmaSafe(e)                                                                                                   \
+     {                                                                                                                  \
+         magma_int_t err = (e);                                                                                         \
+@@ -55,8 +56,8 @@
+             std::exit(EXIT_FAILURE);                                                                                   \
+         }                                                                                                              \
+     }
++*/
+ 
+-/*
+ #define hipsolverSafe(e)                                                                            \
+     {                                                                                               \
+         hipsolverStatus_t err = (e);                                                                \
+@@ -66,6 +67,5 @@
+             std::exit(EXIT_FAILURE);                                                                \
+         }                                                                                           \
+     }
+-*/
+ 
+ #endif /* GpuSafeChecks_hpp */
+diff --git a/src/gpu/LinearAlgebraGPU.hip b/src/gpu/LinearAlgebraGPU.hip
+index a2024d495..9da22d53b 100644
+--- a/src/gpu/LinearAlgebraGPU.hip
++++ b/src/gpu/LinearAlgebraGPU.hip
+@@ -24,8 +24,8 @@
+ 
+ #include <hip/hip_runtime.h>
+ #include <hipblas/hipblas.h>
+-//#include <hipsolver/hipsolver.h>
+-#include <magma_v2.h>
++#include <hipsolver/hipsolver.h>
++//#include <magma_v2.h>
+ 
+ #include "ErrorHandler.hpp"
+ #include "GpuSafeChecks.hpp"
+@@ -291,6 +291,7 @@ computeMatrixMultiplication(double* C, const double* A, const double* B, const s
+     hipSafe(hipFree(d_C));
+ }
+ 
++/*
+ auto
+ diagonalizeMatrix(double* A, double* W, const int64_t nrows_A) -> void
+ {
+@@ -393,8 +394,8 @@ diagonalizeMatrixMultiGPU(double* A, double* W, const int64_t nrows_A, const int
+ 
+     magmaSafe(magma_finalize());
+ }
++*/
+ 
+-/*
+ auto
+ diagonalizeMatrix(double* A, double* D, const int64_t nrows_A) -> void
+ {
+@@ -435,6 +436,5 @@ diagonalizeMatrix(double* A, double* D, const int64_t nrows_A) -> void
+     hipSafe(hipFree(d_info));
+     hipSafe(hipFree(d_work));
+ }
+-*/
+ 
+ }  // namespace gpu
+diff --git a/src/gpu/LinearAlgebraGPU.hpp b/src/gpu/LinearAlgebraGPU.hpp
+index 3b31c6a5d..709e83237 100644
+--- a/src/gpu/LinearAlgebraGPU.hpp
++++ b/src/gpu/LinearAlgebraGPU.hpp
+@@ -45,7 +45,7 @@ auto computeMatrixMultiplication(double* C, const double* A, const double* B, co
+ 
+ auto diagonalizeMatrix(double* A, double* D, const int64_t nrows_A) -> void;
+ 
+-auto diagonalizeMatrixMultiGPU(double* A, double* W, const int64_t nrows_A, const int64_t num_gpus_per_node) -> void;
++//auto diagonalizeMatrixMultiGPU(double* A, double* W, const int64_t nrows_A, const int64_t num_gpus_per_node) -> void;
+ 
+ }  // namespace gpu
+ 
+diff --git a/src/python/ExportGpu.cpp b/src/python/ExportGpu.cpp
+index 8c642ee2d..921e3e9a5 100644
+--- a/src/python/ExportGpu.cpp
++++ b/src/python/ExportGpu.cpp
+@@ -250,7 +250,7 @@ export_gpu(py::module& m)
+             }
+             else
+             {
+-                gpu::diagonalizeMatrixMultiGPU(evecs, evals, static_cast<int64_t>(nrows_A), num_gpus_per_node);
++                gpu::diagonalizeMatrix(evecs, evals, static_cast<int64_t>(nrows_A));
+             }
+ 
+             py::list result;
