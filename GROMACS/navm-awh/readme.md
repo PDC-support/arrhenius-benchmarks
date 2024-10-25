@@ -18,7 +18,7 @@ file](./inputs//README)
 
 For this benchmark an ensemble, called multi-simulation in GROMACS, is used.
 This is a coupled ensemble using the accelerated weight histogram (AWH) method.
-The supplied simluation case uses a 64 member ensemble, and
+The supplied simulation case uses a 64 member ensemble, and
 this is the number of ensemble members that must be used. The
 ensemble simulation mode of the ``mdrun`` tool requires one directory
 per ensemble member simulation. As the AWH algorithm employed uses
@@ -54,7 +54,7 @@ reported in its own log file.
 ## Performance aspects
 
 The simulation system used for this benchmark consists of
-approximately 200000 atoms.  When domain-decomposed a significant
+approximately 200000 atoms.  When domain-decomposed, a significant
 challenge is the inhomogeneous work distribution across domains.
 
 The ensemble run is scheduled as a single job submission, but it is
@@ -73,12 +73,12 @@ simulation throughput across the ensemble.
 ## How to quantify benchmark performance
 
 Benchmark performance FOM is the average ns/day across all ensemble members,
-and must be measured in a simulation (post counter reset) of at least least 15 minutes wall-time.
+and must be measured in a simulation (post counter reset) of at least 15 minutes wall-time.
 
 The benchmark can be run on any amount of resources which satisfies 
 the minimum performance constraints described in the next section.
 
-The measured peak ensemble throughput needs to be a *suitained* performance under full
+The measured peak ensemble throughput needs to be a *sustained* performance under full
 machine load, that is N_jobs equal sized ensemble jobs are executed simultaneously,
 where N_jobs = N_nodes_tot / num_nodes_used with
 * N_nodes_tot the total number of nodes in the respective module
