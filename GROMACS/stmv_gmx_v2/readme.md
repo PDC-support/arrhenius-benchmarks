@@ -12,7 +12,7 @@ For a description of this case please see the [benchmark README file](./inputs/R
 ## Performance aspects
 
 The simulation system used for this benchmark consists of 1.06 million atoms.
-When domain-decomposed inhomegeneous work distribution across domains poses a challenge
+When domain-decomposed inhomogeneous work distribution across domains poses a challenge
 for strong scaling. Additionally, at high scale wider MPI ranks and tuning of
 separate PME ranks is required in order to balance the PP-PME load.
 The limiting factor to strong scaling at peak is 3D-FFT scalability on both
@@ -38,7 +38,7 @@ smallest run must also be given so that the expected performance on
 any number of nodes on which the job could be run can be inferred
 through interpolation with reasonable confidence.  
 
-The measured peak performance needs to be a *suitained* performance under full
+The measured peak performance needs to be a *sustained* performance under full
 machine load, that is N_jobs equal sized jobs are executed simultaneously,
 where N_jobs = N_nodes_tot / num_nodes_used with
 * N_nodes_tot the total number of nodes in the respective module
