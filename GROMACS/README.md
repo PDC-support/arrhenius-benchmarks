@@ -9,9 +9,9 @@ subdirectories [navm-awh](./navm-awh) and
 Gromacs is a highly efficient and optimized code for Molecular
 Dynamics simulations. The software requires a compiler which complies
 with the C++14 standard and supports many hardware specific extensions
-such as AVX ans SVE. The code can make efficient use of GPUs as well.
+such as AVX and SVE. The code can make efficient use of GPUs as well.
 An FFT library is the only required external library. The GROMACS build system is
-able to compile FFTW for CPUs it on demand, a range of 
+able to compile FFTW for CPUs on demand, and a range of 
 CPU and GPU libraries is supported.
 
 ## Source code
@@ -125,7 +125,7 @@ as well as internal to simulation (e.g. load-balancer) reach a
 sufficiently stable state that represents a production run.
 Therefore, it is strongly recommended to exclude such initial "warm-up"
 phase by extending the benchmark run to a sufficient total length
-and excluding the inital part using the `mdrun` internal timer resetting options
+and excluding the initial part using the `mdrun` internal timer resetting options
 `-resethway` or `-resetstep N`.
 Simulation length can be specified using either:
 - as the simulation wall-time in hours using ``-nsteps -1 -maxh T`` (run length will be `T*0.99` hours) or
