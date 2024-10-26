@@ -67,6 +67,8 @@ export MPICC=...
 python3 -m pip install --no-deps --no-binary=mpi4py --no-cache-dir --no-cache -v mpi4py
 ```
 
+Note: If you are using a Cray machine, our recommendation is to load the `PrgEnv-amd` module and set `MPICC` as e.g. `"/opt/rocm/llvm/bin/clang $(cc --cray-print-opts=cflags) $(cc --cray-print-opts=libs)"` when compiling `mpi4py`.
+
 ## Install VeloxChem GPU-HIP version
 
 Please update `HIPCC_COMPILE_FLAGS_APPEND` with MPI include folder 
