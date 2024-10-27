@@ -59,15 +59,15 @@ VeloxChem GPU-HIP version depends on the following Python packages:
 It is recommended to install these packages and VeloxChem in a Python virtual environment such as `$VLXHOME/vlxenv`.
 
 Please note that `mpi4py` should be compiled from source using the same compiler and MPI library as for compiling VeloxChem. Below
-is an example of installing mpi4py from source using user-defined `CC` and `MPICC` compilers.
+is an example of installing mpi4py from source with user-defined compilers.
 
 ```bash
 export CC=...
 export MPICC=...
-python3 -m pip install --no-deps --no-binary=mpi4py --no-cache-dir --no-cache -v mpi4py
+python3 -m pip install --no-deps --no-binary=mpi4py --no-cache-dir -v mpi4py
 ```
 
-Note: If you are using a Cray machine, our recommendation is to load the `PrgEnv-amd` module and set `MPICC` as e.g. `"/opt/rocm/llvm/bin/clang $(cc --cray-print-opts=cflags) $(cc --cray-print-opts=libs)"` when compiling `mpi4py`.
+Note: If you are using a Cray machine, our recommendation is to load the `PrgEnv-amd` module and set `MPICC` to e.g. `"/opt/rocm/llvm/bin/clang $(cc --cray-print-opts=cflags) $(cc --cray-print-opts=libs)"` when compiling `mpi4py`.
 
 ## Install VeloxChem GPU-HIP version
 

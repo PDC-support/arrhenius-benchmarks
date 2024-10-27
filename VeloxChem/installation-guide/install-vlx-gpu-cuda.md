@@ -33,7 +33,7 @@ is an example of installing mpi4py using `gcc`.
 ```bash
 export CC=gcc
 export MPICC=mpicc
-python3 -m pip install --no-deps --no-binary=mpi4py --no-cache-dir --no-cache -v mpi4py
+python3 -m pip install --no-deps --no-binary=mpi4py --no-cache-dir -v mpi4py
 ```
 
 ## Install VeloxChem GPU-CUDA version

@@ -38,6 +38,13 @@ VeloxChem CPU version depends on the following Python packages:
 It is recommended to install these packages and VeloxChem in a Python virtual environment such as `$VLXHOME/vlxenv`.
 
 Please note that `mpi4py` should be compiled from source using the same compiler and MPI library as for compiling VeloxChem. 
+Below is an example of installing mpi4py from source with user-defined compilers.
+
+```bash
+export CC=...
+export MPICC=...
+python3 -m pip install --no-deps --no-binary=mpi4py --no-cache-dir -v mpi4py
+```
 
 Please also note that VeloxChem CPU version uses `numpy` for matrix diagonalization, and it is important to make sure that
 the installed `numpy` has good performance.
