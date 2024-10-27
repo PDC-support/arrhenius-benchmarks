@@ -13,7 +13,9 @@ The benchmark numbers for Neko, Gromacs and Veloxchem should be committed for bo
 
 The application benchmarks are either of a throughput or strong-scaling type, which differ in how they should be run and in reported. A detailed description of how the figures of merit for each type of benchmark should be obtained can be found in the README files for each benchmark in sub-directories.
 
-A benchmark report should accompany each tender describing how the benchmark numbers were obtained. A list of requirements on the benchmark report can be found in the Tender document Chapter 4.2.
+The figure of merits can be pledged numbers, meaning that it is not required of the vendor to have run the benchmarks on the same hardware as is offered in the tender at the time of submission. Projected performance numbers (for example for future unreleased hardware) may be used but must still be demonstrated during the acceptance testing.
+
+A benchmark report should accompany each tender describing how the the figure of merits were obtained. A list of requirements on the benchmark report can be found in the Tender document Chapter 4.2.
 
 ## Figure-of-merits (FOM)
 
@@ -53,6 +55,8 @@ The vendors are advised to keep the following in mind when committing the FOMs:
 
 * When demonstrating the FOM of a benchmark, the Module must be filled with multiple copies of the job which execute simultaneously, each using the tendered number of servers for the benchmark per individual job. Every server must run at least one job. If this cannot be achieved in one session (for example, for large benchmarks spanning more than 50% of the module), the vendor is required to run several sessions that in combination includes every server in the module.
 * The FOM of the slowest job across all sessions is used for evaluating the performance for that benchmark.
+* No performance projections are allowed.
+* The power usage of the Module must not exceed the committed value for power usage in Appendix 1.
 
 ## Contact info
 Questions regarding the benchmark(s) must be posted via the "question and answer function" in Visma TendSign.
